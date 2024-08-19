@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 function CartButton() {
 	const nav = useNavigate();
 	const handleCartClick = () => {
 		nav("/cart");
 	};
-	const items = [];
-	const bgColorName = items.length === 0 ? "none" : "white";
+	const { cartItems } = useSelector((state) => state.cart);
+	const bgColorName = cartItems.length === 0 ? "none" : "white";
 	return (
 		<button
 			onClick={handleCartClick}
@@ -16,7 +17,7 @@ function CartButton() {
 			<i className="bi bi-cart3"></i>
 			<span className="mx-2">Checkout</span>
 			<span className={`badge text-success bg-${bgColorName}`}>
-				{items.length}
+				{cartItems.length}
 			</span>
 		</button>
 	);

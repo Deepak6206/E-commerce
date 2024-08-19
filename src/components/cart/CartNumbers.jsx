@@ -1,12 +1,8 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
+import Price from "../extra/Price";
 function CartNumbers() {
-	const cartNumbers = {
-		subtotal: 1599.0,
-		shipping: 40.0,
-		tax: 287.82,
-		total: 1926.82,
-	};
+	const { cartNumbers } = useSelector((state) => state.cart);
 	const items = [
 		{ title: "Subtotal", price: cartNumbers.subtotal },
 		{ title: "Shipping", price: cartNumbers.shipping },
@@ -20,7 +16,9 @@ function CartNumbers() {
 					return (
 						<li className="list-group-item d-flex justify-content-between">
 							<span>{item.title}</span>
-							<span className="text-muted">{item.price}</span>
+							<span className="text-muted">
+								<Price value={item.price} decimals={2} />
+							</span>
 						</li>
 					);
 				})}

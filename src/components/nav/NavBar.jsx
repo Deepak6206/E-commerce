@@ -2,10 +2,12 @@ import React from "react";
 import CategorySelector from "./CategorySelector";
 import SearchBar from "./SearchBar";
 import CartButton from "./CartButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function NavBar(props) {
 	const nav = useNavigate();
+	const { pathname } = useLocation();
+
 	const handleHomeNavigation = () => {
 		nav("/");
 	};
@@ -31,8 +33,13 @@ function NavBar(props) {
 					className="collapse navbar-collapse justify-content-end"
 					id="navbarSupportedContent"
 				>
-					<CategorySelector />
-					<SearchBar />
+					{pathname === "/" && (
+						<>
+							<CategorySelector />
+							<SearchBar />
+						</>
+					)}
+
 					<CartButton />
 				</div>
 			</div>

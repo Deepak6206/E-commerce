@@ -4,8 +4,16 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Single from "./pages/Single";
 import Cart from "./pages/Cart";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCartNumbers } from "./features/cart/cartSlice";
+import { set } from "lodash";
 function App() {
+	const dispatch = useDispatch();
+	const { cartItems } = useSelector((state) => state.cart);
+	useEffect(() => {
+		dispatch(setCartNumbers());
+	}, [cartItems]);
 	return (
 		<div className="wrapper bg-dark text-white">
 			<NavBar title="Ezee-Cart-Blitz" />
